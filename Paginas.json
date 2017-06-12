@@ -1,0 +1,150 @@
+[
+    {
+        "Enlaces": [
+            {
+                "Categoria": "Deportes",
+                "URL": "www.depor.com",
+                "Nombre Pagina": "DEPOR"
+            },
+            {
+                "Categoria": "Deportes",
+                "URL": "www.nba.com",
+                "Nombre Pagina": "NBA"
+            }
+        ],
+        "Categoria": "Deportes",
+        "URL": "www.nba2.com",
+        "Nombre Pagina": "nba2"
+    },
+    {
+        "Enlaces": [
+            {
+                "Categoria": "Deportes",
+                "URL": "www.nba2.com",
+                "Nombre Pagina": "nba2"
+            }
+        ],
+        "Categoria": "Deportes",
+        "URL": "www.depor.com",
+        "Nombre Pagina": "DEPOR"
+    },
+    {
+        "Enlaces": [],
+        "Categoria": "Informatica",
+        "URL": "www.ED.com",
+        "Nombre Pagina": "Escuela Digital"
+    },
+    {
+        "Enlaces": [
+            {
+                "Categoria": "Informatica",
+                "URL": "www.ED.com",
+                "Nombre Pagina": "Escuela Digital"
+            }
+        ],
+        "Categoria": "Informatica",
+        "URL": "www.platzi.com",
+        "Nombre Pagina": "Platzi"
+    },
+    {
+        "Enlaces": [
+            {
+                "Categoria": "Informatica",
+                "URL": "www.ED.com",
+                "Nombre Pagina": "Escuela Digital"
+            },
+            {
+                "Categoria": "Informatica",
+                "URL": "www.platzi.com",
+                "Nombre Pagina": "Platzi"
+            }
+        ],
+        "Categoria": "Informatica",
+        "URL": "www.udemy.com",
+        "Nombre Pagina": "Udemy"
+    },
+    {
+        "Enlaces": [],
+        "Categoria": "Gastronomia",
+        "URL": "www.gaston.com",
+        "Nombre Pagina": "Gaston"
+    },
+    {
+        "Enlaces": [
+            {
+                "Categoria": "Informatica",
+                "URL": "www.ED.com",
+                "Nombre Pagina": "Escuela Digital"
+            },
+            {
+                "Categoria": "Informatica",
+                "URL": "www.udemy.com",
+                "Nombre Pagina": "Udemy"
+            }
+        ],
+        "Categoria": "Red Social",
+        "URL": "www.hi5.com",
+        "Nombre Pagina": "Hi5"
+    },
+    {
+        "Enlaces": [
+            {
+                "Categoria": "Deportes",
+                "URL": "www.nba2.com",
+                "Nombre Pagina": "nba2"
+            },
+            {
+                "Categoria": "Deportes",
+                "URL": "www.depor.com",
+                "Nombre Pagina": "DEPOR"
+            }
+        ],
+        "Categoria": "Deportes",
+        "URL": "www.nba.com",
+        "Nombre Pagina": "NBA"
+    },
+    {
+        "Enlaces": [
+            {
+                "Categoria": "Deportes",
+                "URL": "www.depor.com",
+                "Nombre Pagina": "DEPOR"
+            },
+            {
+                "Categoria": "Informatica",
+                "URL": "www.ED.com",
+                "Nombre Pagina": "Escuela Digital"
+            },
+            {
+                "Categoria": "Red Social",
+                "URL": "www.hi5.com",
+                "Nombre Pagina": "Hi5"
+            }
+        ],
+        "Categoria": "Cultura",
+        "URL": "www.history.com",
+        "Nombre Pagina": "History"
+    },
+    {
+        "Enlaces": [
+            {
+                "Categoria": "Informatica",
+                "URL": "www.udemy.com",
+                "Nombre Pagina": "Udemy"
+            },
+            {
+                "Categoria": "Red Social",
+                "URL": "www.hi5.com",
+                "Nombre Pagina": "Hi5"
+            },
+            {
+                "Categoria": "Cultura",
+                "URL": "www.history.com",
+                "Nombre Pagina": "History"
+            }
+        ],
+        "Categoria": "Red Social",
+        "URL": "www.youtube.com",
+        "Nombre Pagina": "youtube"
+    }
+]

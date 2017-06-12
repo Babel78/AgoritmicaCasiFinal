@@ -1,0 +1,16 @@
+[
+    {
+        "Nombre": "Axel Campos Salazar",
+        "ID_Usuario": "axel123",
+        "Telefono": "932828396",
+        "Fecha de Nacimiento": "15-07-1997",
+        "Contraseña": "123"
+    },
+    {
+        "Nombre": "Sergio Blas Lopez",
+        "ID_Usuario": "sergio123",
+        "Telefono": "989889992",
+        "Fecha de Nacimiento": "14-09-1994",
+        "Contraseña": "12345"
+    }
+]

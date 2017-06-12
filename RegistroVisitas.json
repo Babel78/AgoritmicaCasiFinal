@@ -1,0 +1,37 @@
+[
+    {
+        "Fecha": "12-25-2017",
+        "Hora": "12:25:49",
+        "Categoria": "Cultura",
+        "Pagina": "History",
+        "URL": "www.history.com"
+    },
+    {
+        "Fecha": "12-25-2017",
+        "Hora": "12:25:51",
+        "Categoria": "Red Social",
+        "Pagina": "Hi5",
+        "URL": "www.hi5.com"
+    },
+    {
+        "Fecha": "12-25-2017",
+        "Hora": "12:25:53",
+        "Categoria": "Informatica",
+        "Pagina": "Udemy",
+        "URL": "www.udemy.com"
+    },
+    {
+        "Fecha": "12-25-2017",
+        "Hora": "12:25:54",
+        "Categoria": "Informatica",
+        "Pagina": "Platzi",
+        "URL": "www.platzi.com"
+    },
+    {
+        "Fecha": "12-25-2017",
+        "Hora": "12:25:56",
+        "Categoria": "Informatica",
+        "Pagina": "Escuela Digital",
+        "URL": "www.ED.com"
+    }
+]
