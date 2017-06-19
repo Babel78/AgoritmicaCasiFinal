@@ -64,7 +64,7 @@ public class Formulario extends javax.swing.JFrame {
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
         getContentPane().add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 220, -1));
 
-        jLabel5.setText("Fecha de Nacimiento: (DD-MM-AA) ");
+        jLabel5.setText("Fecha de Nacimiento: (DD-MM-AAAA) ");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
         getContentPane().add(usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 310, 220, -1));
 

@@ -132,7 +132,7 @@ public ArrayList<Usuario> ObtenerUsuarioNombre(String nombre) throws ParseExcept
         JSONObject obj=(JSONObject) j.get(i);
         String nomb=(String) obj.get("Nombre");
         String aux[]=nomb.split(" ");
-        if(aux[0].equals(nombre)){
+        if((aux[0].equals(nombre) || empiezaPor(nombre, aux[0])) || (aux[1].equals(nombre) || empiezaPor(nombre, aux[1])) || (aux[2].equals(nombre) || empiezaPor(nombre, aux[2]))){
         Usuario nuevo=new Usuario();
         nuevo.setNombre((String)obj.get("Nombre"));
         nuevo.setFecha_nac((String)obj.get("Fecha de Nacimiento"));
@@ -144,6 +144,14 @@ public ArrayList<Usuario> ObtenerUsuarioNombre(String nombre) throws ParseExcept
         i++;
     }
     return lista;
+}
+public boolean empiezaPor(String inicio,String evalua){
+    if(inicio.isEmpty() || inicio.length()>evalua.length()) return false;
+    for (int i = 0; i < inicio.length(); i++) {
+        if(inicio.charAt(i)!=evalua.charAt(i))
+            return false;
+    }
+    return true;
 }
     public boolean Existe(Usuario us) throws ParseException{
         boolean existe=false;
@@ -159,5 +167,42 @@ public ArrayList<Usuario> ObtenerUsuarioNombre(String nombre) throws ParseExcept
             }
         }
        return existe; 
+    }
+    
+    public void EliminarUsuario(String id) throws ParseException{
+       MetodosPaginas met_p=new MetodosPaginas();
+       MetodosPerfildeUsuario met_perf=new MetodosPerfildeUsuario();
+       JSONArray lista=ObtenerArray();
+       int pos=posbyId(id);
+       lista.remove(pos);
+       met_p.EliminarHistorial(id);
+       met_perf.EliminarPerfil(id);
+       try {
+            FileWriter f=new FileWriter("Usuarios.json");
+            f.write(lista.toJSONString());
+            f.flush();
+        }catch (IOException e) {
+            System.out.println(e);
+        }
+       
+    }
+    
+    public int posbyId(String id) throws ParseException{
+        JSONArray lista=ObtenerArray();
+        int i=0;
+        int pos=-1;
+        boolean hallado=false;
+        while(i<lista.size() && !hallado){
+            JSONObject obj=(JSONObject) lista.get(i);
+            String ID=(String) obj.get("ID_Usuario");
+            if(ID.equals(id)){
+                pos=i;
+                hallado=true;
+            }
+            else{
+                i++;
+            }
+        }
+        return pos;
     }
 }

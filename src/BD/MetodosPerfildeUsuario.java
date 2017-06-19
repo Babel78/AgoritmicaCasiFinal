@@ -94,8 +94,8 @@ public class MetodosPerfildeUsuario {
             }
         }
         return nuevo;
-        }
-    private void AuxActualizarIntereses(PerfildeUsuario nuevo,int indice){
+    }
+    private void AuxActualizarIntereses(PerfildeUsuario nuevo,int indice) throws ParseException{
             JSONObject obj=new JSONObject();
             obj.put("ID_Usuario", nuevo.getId_Usuario());
             JSONArray intereses=new JSONArray ();
@@ -108,7 +108,9 @@ public class MetodosPerfildeUsuario {
             intereses.add(inter);
             aux=aux.getSgte();
             }
-            obj.put("Intereses", intereses);
+            JSONArray lis=InteresesbyId(nuevo.getId_Usuario());
+            lis.addAll(intereses);
+            obj.put("Intereses", lis);
             array.remove(indice);
             array.add(indice, obj);
           try {
@@ -118,6 +120,20 @@ public class MetodosPerfildeUsuario {
         } catch (IOException e) {
             System.out.println(e);
         }    
+    }
+    
+    public JSONArray InteresesbyId(String id) throws ParseException{
+        JSONArray lis=ObtenerArray();
+        JSONArray intereses = null;
+        for (int i = 0; i < lis.size(); i++) {
+            JSONObject ob=(JSONObject) lis.get(i);
+            if(id.equals((String) ob.get("ID_Usuario"))){
+                intereses=(JSONArray) ob.get("Intereses");
+                break;
+            }
+        }
+
+        return intereses;
     }
     public void ActualizarIntereses(PerfildeUsuario nuevo) throws ParseException{
         if(Existe(nuevo)){
@@ -213,7 +229,7 @@ public class MetodosPerfildeUsuario {
             }
             cont=0;  
         }
-       aux=aux.getSgte();
+        aux=aux.getSgte();
     }
     return lista2;
    }
@@ -233,6 +249,38 @@ public class MetodosPerfildeUsuario {
        }
        return indice;
    }
+ 
+ public void EliminarPerfil(String id) throws ParseException{
+     JSONArray perfil=ObtenerArray();
+     int pos=posbyId(id);
+     perfil.remove(pos);
+    try {
+        FileWriter f=new FileWriter("PerfilUsuarios.json");
+        f.write(perfil.toJSONString());
+        f.flush();
+    }catch (IOException e) {
+      System.out.println(e);
+    }
+ }
+ 
+ public int posbyId(String id) throws ParseException{
+        JSONArray lista=ObtenerArray();
+        int i=0;
+        int pos=-1;
+        boolean hallado=false;
+        while(i<lista.size() && !hallado){
+            JSONObject obj=(JSONObject) lista.get(i);
+            String ID=(String) obj.get("ID_Usuario");
+            if(ID.equals(id)){
+                pos=i;
+                hallado=true;
+            }
+            else{
+                i++;
+            }
+        }
+        return pos;
+ }
 }
 
 

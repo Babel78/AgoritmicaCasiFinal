@@ -115,7 +115,7 @@ public class Paginas extends javax.swing.JFrame {
                 }
             }
             Date hora=new Date();
-            metodos.GrabarRegistro(nodo, hora);
+            metodos.GrabarHistorial(p,nodo, hora);
             Interes inter=new Interes();
             inter.setNombre(nodo.getPag().getCategoria());
             inter.setPorcetaje(1);

@@ -2,12 +2,13 @@ package Interfaz;
 
 import BD.MetodosPerfildeUsuario;
 import BD.MetodosUsuarios;
+import Clases.Interes;
 import Clases.ListaInteres;
 import Clases.PerfildeUsuario;
 import Clases.Usuario;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Collections;
+import static javafx.scene.input.KeyCode.N;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -188,9 +189,9 @@ public final class PerfilUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            Registro regis;
+            Historial regis;
         try {
-            regis = new Registro(perfil);
+            regis = new Historial(perfil);
             regis.setVisible(true);
         } catch (ParseException ex) {
             System.out.println(ex);
@@ -199,11 +200,20 @@ public final class PerfilUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
     public void cargarDatos(PerfildeUsuario p) throws ParseException{
         MetodosUsuarios met=new MetodosUsuarios();
+        MetodosPerfildeUsuario mpu=new MetodosPerfildeUsuario();
         Usuario usuario=met.ObtenerUsuarioID(p.getId_Usuario());
+        PerfildeUsuario perf=mpu.ObtenerPerfil(usuario);
         nombre.setText(usuario.getNombre());
         telefono.setText(usuario.getTelefono());
         fecha.setText(usuario.getFecha_nac());
-        Graficar(p.getIntereses());
+        if(perf.getIntereses().cab!=null){
+           Graficar(perf.getIntereses()); 
+        }
+        else{
+            panelperfil.setVisible(false);
+        }
+        
+        
     }
     public void Graficar(ListaInteres lista) throws ParseException{
         MetodosPerfildeUsuario met=new MetodosPerfildeUsuario();
@@ -211,22 +221,55 @@ public final class PerfilUsuario extends javax.swing.JFrame {
         ArrayList <ListaInteres> l=new ArrayList();
         ArrayList <String> l_categoria=met.ObtenerCategoriasPaginas(lista);
         ArrayList <Float> l_interes=met.ObtenerPorcentajes(lista);
+        ArrayList <Interes> inter = new ArrayList<>();
         float tam=0;
         for (int i = 0; i < l_interes.size(); i++) {
             Float get = l_interes.get(i);
             tam=tam+get;
         }
         for (int i = 0; i < l_categoria.size(); i++) {
-            data.addValue(l_interes.get(i)*100/tam, "", l_categoria.get(i));
+            float p=l_interes.get(i)*100/tam;
+            String cat=l_categoria.get(i);
+            Interes nuevo=new Interes();
+            nuevo.setPorcetaje(p);
+            nuevo.setNombre(cat);
+            inter.add(nuevo);
         }
-        JFreeChart grafica=ChartFactory.createBarChart("Intereses", "Categorias", "Porcentaje", data, PlotOrientation.VERTICAL, true, true, false);
+        int izq=0;
+        int der=inter.size()-1;
+        Ordenar(inter,izq,der);
+        Collections.reverse(inter);
+        for (int i = 0; i < inter.size(); i++) {
+            Interes get = inter.get(i);
+            data.addValue(get.getPorcetaje(), "", get.getNombre());
+        }
+        
+        JFreeChart grafica=ChartFactory.createBarChart("Intereses", "Categorias", "Porcentaje(%)", data, PlotOrientation.VERTICAL, true, true, false);
         ChartPanel contenedor=new ChartPanel(grafica);
         contenedor.setBounds(0, 0, 500, 200);
         panelperfil.add(contenedor); 
     }
+    public void Ordenar(ArrayList<Interes> interes,int izq,int der){
+        Interes pivote=interes.get(izq);
+            int i=izq;
+            int j=der; 
+            while(i<j){          
+               while(interes.get(i).getPorcetaje()<=pivote.getPorcetaje() && i<j) i++; 
+               while(interes.get(j).getPorcetaje()>pivote.getPorcetaje()) j--;         
+               if (i<j) {                                 
+                   Interes aux= interes.get(i);                  
+                   interes.set(i, interes.get(j));
+                   interes.set(j,aux);
+               }
+             }
+             interes.set(izq, interes.get(j)); 
+             interes.set(j, pivote); 
+             if(izq<j-1)
+                Ordenar(interes,izq,j-1);
+             if(j+1 <der)
+                Ordenar(interes,j+1,der); 
+    }
     
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel fecha;
     private javax.swing.JButton jButton1;

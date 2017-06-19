@@ -1,7 +1,9 @@
 package Interfaz;
 
 import BD.MetodosPaginas;
+import Clases.ListaPaginas;
 import Clases.NodoPagina;
+import Clases.Pagina;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import org.json.simple.parser.ParseException;
@@ -33,6 +35,7 @@ public class AdministradorPaginas extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jButton5 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,6 +78,13 @@ public class AdministradorPaginas extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Ver enlaces");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,10 +96,12 @@ public class AdministradorPaginas extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(agregarP, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(eliminarP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))
+                        .addComponent(eliminarP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(agregarP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -110,9 +122,11 @@ public class AdministradorPaginas extends javax.swing.JFrame {
                         .addComponent(verP)
                         .addGap(18, 18, 18)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(125, 125, 125)
+                        .addGap(67, 67, 67)
+                        .addComponent(jButton1)
+                        .addGap(79, 79, 79)
                         .addComponent(agregarP)
-                        .addGap(89, 89, 89)
+                        .addGap(43, 43, 43)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(66, 66, 66)
                         .addComponent(eliminarP)
@@ -158,10 +172,42 @@ public class AdministradorPaginas extends javax.swing.JFrame {
             dispose();
     }//GEN-LAST:event_agregarPActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            try {
+            ArrayList<NodoPagina> lista=metodos.ObtenerPaginas();
+            int dim=lista.size();
+            Object dat[][];
+            int row=tabla.getSelectedRow();
+            Object o=tabla.getValueAt(tabla.getSelectedRow(), tabla.getSelectedColumn());
+            NodoPagina nodo = null;
+            for (int i = 0; i < lista.size(); i++) {
+                NodoPagina get = lista.get(i);
+                if(o.equals(get.getPag().getNombrePag())){
+                    nodo=lista.get(i);
+                }
+            }
+            ArrayList<NodoPagina> aux=nodo.getNodos().listaP;
+            tablaEnlaces(aux);
+                       
+        } catch (ParseException e) {
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+        public void tablaEnlaces(ArrayList<NodoPagina> enlaces){
+        Object dat[][]=new Object[enlaces.size()][3];
+        for (int i = 0; i < enlaces.size(); i++) {
+            Pagina pag = enlaces.get(i).getPag();
+            Object o[]={pag.getNombrePag(),pag.getDirPag(),pag.getCategoria()};
+            for (int j = 0; j < o.length; j++) {
+                    dat[i][j]= o[j];
+            }
+        }
+        modelo.setDataVector(dat, cabecera);
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarP;
     private javax.swing.JButton eliminarP;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
